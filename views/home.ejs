@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ink & Ideas | My Blog</title>
+  <link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="logo" href="/">Ink & Ideas<span>.</span></a>
+    <a class="nav-link" href="#posts">My stories</a>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <p class="eyebrow">YOUR PERSONAL SPACE</p>
+      <h1>Ideas worth<br /><span>writing down.</span></h1>
+      <p class="hero-text">
+        A little space for your thoughts, stories, and discoveries.
+      </p>
+    </section>
+
+    <section class="composer">
+      <h2>Write something new</h2>
+
+      <form action="/posts" method="POST">
+        <label for="title">Post title</label>
+        <input
+          id="title"
+          name="title"
+          type="text"
+          placeholder="Give your story a title..."
+          maxlength="120"
+          required
+        />
+
+        <label for="content">Your story</label>
+        <textarea
+          id="content"
+          name="content"
+          rows="5"
+          placeholder="What's on your mind?"
+          required
+        ></textarea>
+
+        <button type="submit" class="button">
+          Publish story <span aria-hidden="true">↗</span>
+        </button>
+      </form>
+    </section>
+
+    <section class="posts-section" id="posts">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">THE COLLECTION</p>
+          <h2>Latest stories</h2>
+        </div>
+        <span class="post-count"><%= posts.length %> posts</span>
+      </div>
+
+      <% if (posts.length === 0) { %>
+        <div class="empty-state">
+          <span class="empty-icon">✳</span>
+          <h3>Your story starts here.</h3>
+          <p>You haven't published anything yet. Write your first post above.</p>
+        </div>
+      <% } else { %>
+        <div class="posts-grid">
+          <% posts.forEach((post) => { %>
+            <article class="post-card">
+              <p class="post-number">
+                STORY <%= String(post.id).padStart(2, "0") %>
+              </p>
+
+              <h3><%= post.title %></h3>
+              <p class="post-content"><%= post.content %></p>
+
+              <div class="post-actions">
+                <a
+                  class="edit-link"
+                  href="/posts/<%= post.id %>/edit"
+                >Edit story ↗</a>
+
+                <form
+                  action="/posts/<%= post.id %>/delete"
+                  method="POST"
+                  onsubmit="return confirm('Delete this story?')"
+                >
+                  <button class="delete-button" type="submit">
+                    Delete
+                  </button>
+                </form>
+              </div>
+            </article>
+          <% }) %>
+        </div>
+      <% } %>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Ink & Ideas — Made for the love of words.</p>
+  </footer>
+</body>
+</html>

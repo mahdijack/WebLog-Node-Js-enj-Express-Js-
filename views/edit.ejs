@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edit Story | Ink & Ideas</title>
+  <link rel="stylesheet" href="/styles/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="logo" href="/">Ink & Ideas<span>.</span></a>
+    <a class="nav-link" href="/">Back to stories</a>
+  </header>
+
+  <main class="container edit-container">
+    <section class="hero">
+      <p class="eyebrow">REVISIT YOUR WORDS</p>
+      <h1>Edit your<br /><span>story.</span></h1>
+      <p class="hero-text">Every good idea can get a little better.</p>
+    </section>
+
+    <section class="composer">
+      <h2>Update your post</h2>
+
+      <form action="/posts/<%= post.id %>/edit" method="POST">
+        <label for="title">Post title</label>
+        <input
+          id="title"
+          name="title"
+          type="text"
+          value="<%= post.title %>"
+          maxlength="120"
+          required
+        />
+
+        <label for="content">Your story</label>
+        <textarea
+          id="content"
+          name="content"
+          rows="8"
+          required
+        ><%= post.content %></textarea>
+
+        <div class="form-actions">
+          <button type="submit" class="button">Save changes ↗</button>
+          <a class="cancel-link" href="/">Cancel</a>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Ink & Ideas — Made for the love of words.</p>
+  </footer>
+</body>
+</html>
